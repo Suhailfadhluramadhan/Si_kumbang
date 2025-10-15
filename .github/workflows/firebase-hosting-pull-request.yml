@@ -1,35 +1,65 @@
-name: Deploy to Firebase Hosting on PR or Push to Main
+name: Firebase Hosting CI/CD
+
 on:
   pull_request:
   push:
     branches:
       - main
+
 permissions:
-  checks: write
   contents: read
   pull-requests: write
+
 jobs:
-  build_and_preview:
-    if: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.ref == 'refs/heads/main' }}
+  preview:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-      
+
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Install dependencies with pnpm
+      - name: Install dependencies
         run: pnpm install
 
       - name: Build project
         run: pnpm run build
 
-      - name: Deploy to Firebase Hosting
+      - name: Deploy to Firebase preview channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SIKUMBANG_2DDA3 }}
+          projectId: sikumbang-2dda3
+          channelId: pr-${{ github.event.pull_request.number }}
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Deploy to Firebase live hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
