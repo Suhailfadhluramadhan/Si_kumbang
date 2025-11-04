@@ -50,7 +50,7 @@ const vaccineMetadata = {
     afterImun: "Nyeri/bengkak/kemerahan tempat penyuntikan, demam",
   },
   g: {
-    name: "Plio 4",
+    name: "Polio 4",
     month: 18,
     benefit:
       "Mencegah penyakit polio yang dapat menyebabkan lumpuh layuh pada tungkai dan atau lengan",
@@ -64,7 +64,7 @@ const vaccineMetadata = {
     afterImun: "Nyeri/bengkak/kemerahan tempat penyuntikan, rewel, demam",
   },
   i: {
-    name: "Hepatitis B 5",
+    name: "Hepatitis B 4",
     month: 18,
     benefit:
       "Mencegah penyakit  hepatitis B yang dapat menyebabkan kerusakan hati",
@@ -94,14 +94,14 @@ const vaccineMetadata = {
       "Demam, nyeri kepala, pusing, nyeri sendi, mual, nyeri perut, alergi.",
   },
   m: {
-    name: "Influenza",
+    name: "Influenza 4",
     month: 30,
     benefit: "mencegah sakit berat akibat influenza",
     afterImun:
       "nyeri/bengkak/kemerahan tempat penyuntikan, demam, nyeri otot, nyeri kepala,alergi",
   },
   n: {
-    name: "nfluenza 5",
+    name: "Influenza 5",
     month: 36,
     benefit: "Mencegah sakit berat akibat influenza",
     afterImun:

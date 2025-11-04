@@ -77,24 +77,6 @@ export default function Chart({ childWeight, childAge, status }) {
         </p>
       </>
     );
-    saran = (
-      <>
-        <ul className="text-sm list-disc text-gray-700 space-y-1">
-          <li>
-            <p>Tingkatkan asupan gizi terutama protein hewani</p>
-          </li>
-          <li>
-            <p>Berikan makanan bergizi lebih sering dalam porsi kecil</p>
-          </li>
-          <li>
-            <p>
-              Konsultasikan ke tenaga kesehatan bila berat badan tidak
-              naik dalam 1–2 bulan
-            </p>
-          </li>
-        </ul>
-      </>
-    );
   } else if (status === "Gizi Lebih") {
     data = (
       <>
@@ -117,6 +99,33 @@ export default function Chart({ childWeight, childAge, status }) {
           </li>
           <li>
             <p>Dorong anak aktif bergerak setiap hari</p>
+          </li>
+        </ul>
+      </>
+    );
+  } else if (status === "Gizi Buruk") {
+    data = (
+      <>
+        <h1>{"Gizi buruk (Z-score < -3 SD)"}</h1>
+
+        <p>
+          Anak memiliki status gizi buruk, dengan berat badan jauh di bawah
+          standar usianya dan memerlukan perhatian khusus.
+        </p>
+      </>
+    );
+
+    saran = (
+      <>
+        <ul className="text-sm list-disc text-gray-700 space-y-1">
+          <li>
+            <p>Segera konsultasikan ke puskesmas atau dokter</p>
+          </li>
+          <li>
+            <p>pastikan anak mendapat makanan padat gizi dan cukup cairan</p>
+          </li>
+          <li>
+            <p>serta pantau berat badan setiap minggu</p>
           </li>
         </ul>
       </>

@@ -282,15 +282,19 @@ export const calculateNutritionStatus = (weight, ageInMonths) => {
   }
 
   let status, color, description;
-  if (zscore >= -3 && zscore < -2) {
+  if (zscore <= -3) {
+    status = "Gizi Buruk";
+    color = "#DC2626";
+    description = "Berat badan sangat kurang (< -3 SD)";
+  } else if (zscore >= -3 && zscore < -2) {
     status = "Gizi Kurang";
     color = "#F97316";
     description = "Berat badan kurang (-3 SD sampai < -2 SD)";
-  } else if (zscore >= -2 && zscore < 2) {
+  } else if (zscore >= -2 && zscore <= 2) {
     status = "Gizi Baik";
     color = "#22C55E";
     description = "Berat badan normal (-2 SD sampai +2 SD)";
-  } else if (zscore >= 2) {
+  } else if (zscore > 2) {
     status = "Gizi Lebih";
     color = "#EAB308";
     description = "Berat badan berlebih (> +2 SD)";

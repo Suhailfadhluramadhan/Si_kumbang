@@ -20,24 +20,21 @@
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-
-
 // src/config/firebase.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
- const firebaseConfig = {
-  apiKey: "AIzaSyDrFxjpJUb30yxfCYI9g9LU96IZo2aCDE8",
-  authDomain: "sikumbang-2dda3.firebaseapp.com",
-  projectId: "sikumbang-2dda3",
-  storageBucket: "sikumbang-2dda3.appspot.com",
-  messagingSenderId: "245697312088",
-  appId: "1:245697312088:web:d83ff03a7bca68443d212d",
-  measurementId: "G-4N5GM7QP66"
+const firebaseConfig = {
+  apiKey: "AIzaSyA3W1cdn1JUG3vuXn6ARwybLU9TwvyD6e0",
+  authDomain: "si-kumbang.firebaseapp.com",
+  projectId: "si-kumbang",
+  storageBucket: "si-kumbang.firebasestorage.app",
+  messagingSenderId: "768754425419",
+  appId: "1:768754425419:web:cdee9fa72f814628e1f7ce",
+  measurementId: "G-ES5GTWX0XX",
 };
-
 // Init Firebase
 const app = initializeApp(firebaseConfig);
 

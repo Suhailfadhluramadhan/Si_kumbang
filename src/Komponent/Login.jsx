@@ -16,14 +16,20 @@ function Login() {
       alert("Login berhasil!");
       navigate("/beranda");
     } catch (err) {
-      alert(err.message);
+      if (
+        err.code === "auth/user-not-found" ||
+        err.code === "auth/invalid-credential"
+      ) {
+        alert("Email atau password salah, atau akun belum terdaftar.");
+      } else {
+        alert("Terjadi kesalahan saat login.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    
     <div className="flex flex-col items-center justify-end h-screen bg-white">
       <div className="flex items-center flex-col">
         <h1 className="text-center kodemono text-2xl">Selamat datang di</h1>

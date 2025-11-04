@@ -14,16 +14,6 @@ const Perkembangan = () => {
   const { user, loading } = useAuth();
   const [data, setData] = useState();
 
-  const chil = useContext(Childd);
-
-  
-  if (!chil) {
-    // Bisa tampilkan loader atau fallback lainnya
-    return (
-      <p className="text-center mt-10 text-gray-500">Memuat data anak...</p>
-    );
-  }
-
   // Text untuk setiap range umur
   const developmentTextsByAge = {
     "12-17": [
@@ -31,7 +21,7 @@ const Perkembangan = () => {
       "Anak bisa membungkuk memungut mainan kemudian berdiri kembali",
       "Anak bisa berjalan mundur lima langkah?",
       "anak bisa memasukan kubus di kotak",
-      "anak bisa memanggi; ayah dengan kata 'papa', memanggil ibu dengan kata 'mama'? ",
+      "anak bisa memanggil ayah dengan kata 'papa', memanggil ibu dengan kata 'mama'? ",
       "Anak bisa menumpuk dua kubus",
       "anak bisa menunjuk apa yang diinginkan tanpa menangis/merengek, anak bisa mengeluarkan suara yang menyenangkan atau menarik tangan ibu?",
       "Anak bisa memperlihatkan rasa cemburu/ bersaing",
@@ -57,6 +47,23 @@ const Perkembangan = () => {
       "Anak bisa makan  nasi sendiri  tanpa banyak tumpah",
       "Anak bisa menyebutkan nama lengkapnya",
       "Anak bisa melepas pakaian sendiri",
+    ],
+  };
+
+  const developmentKeysByAge = {
+    "12-17": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"],
+    "18-23": ["q9", "q10", "q11", "q12", "q13", "q14", "q15", "q16"],
+    "24-36": [
+      "q17",
+      "q18",
+      "q19",
+      "q20",
+      "q21",
+      "q22",
+      "q23",
+      "q24",
+      "q25",
+      "q26",
     ],
   };
 
@@ -131,24 +138,24 @@ const Perkembangan = () => {
     });
   };
 
-  // useEffect(() => {
-  //   const fetchChild = async () => {
-  //     const child = await getChildById(user.uid, id);
-  //     setData(child);
-  //   };
+  useEffect(() => {
+    const fetchChild = async () => {
+      const child = await getChildById(user.uid, id);
+      setData(child);
+    };
 
-  //   if (user?.uid && !loading) {
-  //     fetchChild();
-  //   }
-  // }, [user, loading]);
+    if (user?.uid && !loading) {
+      fetchChild();
+    }
+  }, [user, loading]);
 
   // Tentukan range umur dan text yang sesuai
-  const ageInMonths = chil ? calculateAgeInMonths(chil.birthDate) : 0;
+  const ageInMonths = data ? calculateAgeInMonths(data.birthDate) : 0;
   const currentAgeRange = getAgeRange(ageInMonths);
   const developmentTexts = currentAgeRange
     ? developmentTextsByAge[currentAgeRange]
     : [];
-  const currentDevelopments = chil?.developments?.[currentAgeRange] || {};
+  const currentDevelopments = data?.developments?.[currentAgeRange] || {};
 
   return (
     <div className="min-h-screen bg-white">
@@ -196,10 +203,10 @@ const Perkembangan = () => {
         )}
 
         {/* Checklist Card */}
-        {chil && currentAgeRange && currentDevelopments ? (
+        {data && currentAgeRange && currentDevelopments ? (
           <div
             className={`${
-              chil.gender === "Laki-laki"
+              data.gender === "Laki-laki"
                 ? "bg-gradient-to-br from-blue-400 to-blue-500"
                 : "bg-gradient-to-br from-purple-400 to-purple-500"
             } rounded-3xl p-4`}
@@ -213,7 +220,7 @@ const Perkembangan = () => {
 
             {/* Checklist Items */}
             <div className="max-h-80 overflow-y-auto space-y-3 pr-1">
-              {Object.keys(currentDevelopments).map((key, index) => (
+              {developmentKeysByAge[currentAgeRange].map((key, index) => (
                 <label
                   key={key}
                   className="flex items-start gap-3 cursor-pointer group bg-white hover:bg-gray-300 transition-colors rounded-lg p-3"
@@ -223,7 +230,7 @@ const Perkembangan = () => {
                     checked={currentDevelopments[key] || false}
                     onChange={() => handleCheck(currentAgeRange, key)}
                     className={`mt-0.5 w-5 h-5 rounded border-2 bg-white ${
-                      chil.gender === "Laki-laki"
+                      data.gender === "Laki-laki"
                         ? "border-blue-200 text-blue-600 focus:ring-blue-400"
                         : "border-purple-200 text-purple-600 focus:ring-purple-400"
                     } focus:ring-2 cursor-pointer flex-shrink-0`}
@@ -247,7 +254,7 @@ const Perkembangan = () => {
                 {Object.values(currentDevelopments).filter(Boolean).length} /{" "}
                 {Object.keys(currentDevelopments).length} selesai
               </div>
-              {chil.lastDevelopmentUpdate && (
+              {data.lastDevelopmentUpdate && (
                 <div className="text-center text-white/80 text-xs mt-2">
                   Terakhir diperbarui: {formatDate(data.lastDevelopmentUpdate)}
                 </div>

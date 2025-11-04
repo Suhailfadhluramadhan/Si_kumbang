@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "sikumbang-2dda3"
-  }
+    "default": "sikumbang-2dda3",
+    "siKumbang": "si-kumbang"
+  },
+  "targets": {},
+  "etags": {}
 }

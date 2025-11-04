@@ -253,7 +253,12 @@ const CardAnak = () => {
           </div>
 
           <div
-            className="flex flex-col items-center bg-pink-400 text-pink-800 rounded-lg p-4 w-24 shadow"
+            className={`flex flex-col items-center rounded-lg p-4 w-24 shadow
+    ${
+      resultt.status === "Gizi Kurang"
+        ? "bg-red-500"
+        : "bg-pink-400 text-pink-800"
+    }`}
             onClick={() => navigate("./gizi")}
           >
             <LiaNotesMedicalSolid size={28} />
